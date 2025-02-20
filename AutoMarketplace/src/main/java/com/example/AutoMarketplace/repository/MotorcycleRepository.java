@@ -1,4 +1,7 @@
 package com.example.AutoMarketplace.repository;
 
-public class MotorcycleRepository {
-}
+import org.springframework.stereotype.Repository;
+
+@Repository
+  public interface MotorcycleRepository {
+  }
