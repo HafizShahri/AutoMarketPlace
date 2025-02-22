@@ -9,22 +9,22 @@ import jakarta.persistence.Id;
 public class Vehicle {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String brand;
     private String model;
-    private Integer year;
+    private Integer vehicleYear;
     private Double price;
 
     // Constructor
     public Vehicle(){}
 
-    public Vehicle(String brand, String model, Integer year, Double price)
-    {
+    public Vehicle(Long id, String brand, String model, Integer vehicleYear, Double price) {
+        this.id = id;
         this.brand = brand;
-        this. model = model;
-        this.year = year;
+        this.model = model;
+        this.vehicleYear = vehicleYear;
         this.price = price;
     }
 
@@ -55,12 +55,12 @@ public class Vehicle {
         this.model = model;
     }
 
-    public Integer getYear() {
-        return year;
+    public Integer getVehicleYear() {
+        return vehicleYear;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setVehicleYear(Integer year) {
+        this.vehicleYear = year;
     }
 
     public Double getPrice() {
