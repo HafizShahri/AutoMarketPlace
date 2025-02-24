@@ -10,9 +10,7 @@ public class Customer extends Users {
     private String phoneNumber;
 
     // Constructors
-    public Customer() {
-        super();
-    }
+    public Customer() {}
 
     public Customer(long id, String name, String email, String password, String shippingAddress, String billingAddress, String phoneNumber) {
         super(id, name, email, password);
@@ -25,7 +23,6 @@ public class Customer extends Users {
     public String getShippingAddress() {
         return shippingAddress;
     }
-
     public void setShippingAddress(String shippingAddress) {
         this.shippingAddress = shippingAddress;
     }
@@ -33,7 +30,6 @@ public class Customer extends Users {
     public String getBillingAddress() {
         return billingAddress;
     }
-
     public void setBillingAddress(String billingAddress) {
         this.billingAddress = billingAddress;
     }
@@ -41,7 +37,6 @@ public class Customer extends Users {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
@@ -50,12 +45,9 @@ public class Customer extends Users {
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + getId() +
-                ", name='" + getName() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                ", shippingAddress='" + shippingAddress + '\'' +
+                "shippingAddress='" + shippingAddress + '\'' +
                 ", billingAddress='" + billingAddress + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+                "} " + super.toString();
     }
 }

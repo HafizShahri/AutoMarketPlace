@@ -8,25 +8,26 @@ public class Car extends Vehicle {
     private Integer doors;
 
     // Constructor
-    public Car()
-    {
-        super();
-    }
+    public Car() {}
 
-    public Car(String brand, String model, Integer year, Double price)
-    {
-        super(brand, model, year, price);
+    public Car(Long id, String brand, String name, Integer vehicleYear, Double price, Integer doors) {
+        super(id, brand, name, vehicleYear, price);
         this.doors = doors;
     }
 
     // Getter and setter method
-
     public Integer getDoors ()
     {
         return doors;
     }
-
     public void setDoors(Integer doors) {
         this.doors = doors;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "doors=" + doors +
+                "} " + super.toString();
     }
 }
