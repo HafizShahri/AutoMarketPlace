@@ -34,8 +34,6 @@ public class CarController {
     @PostMapping("/car")
     public ResponseEntity<?> addProduct(@RequestBody Car car) {
 
-        System.out.println("controller class");
-        System.out.println(car);
         try {
             Car car1 = service.addCar(car);
             return new ResponseEntity<>(car1, HttpStatus.CREATED);
