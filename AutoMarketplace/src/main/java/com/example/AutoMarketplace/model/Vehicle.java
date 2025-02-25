@@ -10,16 +10,18 @@ public class Vehicle {
     private Long id;
     private String brand;
     private String name;
+    private String type;
     private Integer vehicleYear;
     private Double price;
 
     // Constructor
     public Vehicle(){}
 
-    public Vehicle(Long id, String brand, String name, Integer vehicleYear, Double price) {
+    public Vehicle(Long id, String brand, String name, String type, Integer vehicleYear, Double price) {
         this.id = id;
         this.brand = brand;
         this.name = name;
+        this.type = type;
         this.vehicleYear = vehicleYear;
         this.price = price;
     }
@@ -42,15 +44,20 @@ public class Vehicle {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Integer getVehicleYear() {
         return vehicleYear;
     }
-
     public void setVehicleYear(Integer year) {
         this.vehicleYear = year;
     }
@@ -58,7 +65,6 @@ public class Vehicle {
     public Double getPrice() {
         return price;
     }
-
     public void setPrice(Double price) {
         this.price = price;
     }
@@ -68,7 +74,8 @@ public class Vehicle {
         return "Vehicle{" +
                 "id=" + id +
                 ", brand='" + brand + '\'' +
-                ", model='" + name + '\'' +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
                 ", vehicleYear=" + vehicleYear +
                 ", price=" + price +
                 '}';

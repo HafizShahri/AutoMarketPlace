@@ -7,8 +7,8 @@ public class Motorcycle extends Vehicle{
 
     public Motorcycle() {}
 
-    public Motorcycle(Long id, String brand, String name, Integer vehicleYear, Double price) {
-        super(id, brand, name, vehicleYear, price);
+    public Motorcycle(Long id, String brand, String name, String type, Integer vehicleYear, Double price) {
+        super(id, brand, name, type, vehicleYear, price);
     }
 
     @Override

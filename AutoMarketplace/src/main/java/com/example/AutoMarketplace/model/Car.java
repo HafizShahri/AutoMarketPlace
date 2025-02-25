@@ -10,8 +10,8 @@ public class Car extends Vehicle {
     // Constructor
     public Car() {}
 
-    public Car(Long id, String brand, String name, Integer vehicleYear, Double price, Integer doors) {
-        super(id, brand, name, vehicleYear, price);
+    public Car(Long id, String brand, String name, String type, Integer vehicleYear, Double price, Integer doors) {
+        super(id, brand, name, type, vehicleYear, price);
         this.doors = doors;
     }
 
