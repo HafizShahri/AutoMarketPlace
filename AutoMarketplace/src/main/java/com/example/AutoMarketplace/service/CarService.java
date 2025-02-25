@@ -21,8 +21,6 @@ public class CarService {
     }
 
     public Car addCar(Car car) {
-        System.out.println("service class");
-        System.out.println(car);
         return repo.save(car);
     }
 
