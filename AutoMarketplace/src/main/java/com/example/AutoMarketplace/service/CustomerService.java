@@ -18,8 +18,9 @@ public class CustomerService {
     }
 
     public Customer getCustomerById(long id) {
-        return repo.findById(id).orElse(null);
+        return repo.findById(id).orElseThrow(() -> new IllegalArgumentException("Customer with ID " + id + " does not exist"));
     }
+
 
     public Customer addCustomer(Customer customer) {
 
