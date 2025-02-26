@@ -1,6 +1,6 @@
 package com.example.AutoMarketplace.repository;
 
-import com.example.AutoMarketplace.model.Order;
+import com.example.AutoMarketplace.model.Order.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

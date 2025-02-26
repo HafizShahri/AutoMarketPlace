@@ -1,6 +1,7 @@
 package com.example.AutoMarketplace.controller;
 
-import com.example.AutoMarketplace.model.Order;
+import com.example.AutoMarketplace.model.Order.Order;
+import com.example.AutoMarketplace.model.Order.OrderDetails;
 import com.example.AutoMarketplace.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,27 +14,28 @@ public class OrderController {
     @Autowired
     OrderService serv;
 
-    @GetMapping("/getOrders")
-    public ResponseEntity<List<Order>> GetOrderList (){
-        return serv.GetOrderListByCustomer();
-    }
-    @GetMapping("/ordersByCustomer")
-    public ResponseEntity<List<Order>> getOrderListByCustomerId(@RequestParam Long customerId) {
+    @GetMapping("/customer={customerId}/ordersByCustomer")
+    public ResponseEntity<List<OrderDetails>> GetOrderList(@PathVariable Long customerId) {
         return serv.getOrderListByCustomerId(customerId);
     }
 
-    @PostMapping("/addOrder")
-    public ResponseEntity<Order> AddOrder (@RequestParam Long vehicleId, @RequestParam Long customerId, @RequestParam double price){
-        return serv.addOrder( vehicleId, customerId, price);
+    @PostMapping("/customer={customerId}/motorcycle/addOrder={vehicleId}")
+    public ResponseEntity<Order> AddOrderMotorcycle(@PathVariable Long vehicleId, @PathVariable Long customerId){
+        return serv.addOrder( "motorcycle", vehicleId, customerId);
     }
 
-    @PutMapping("/Purchase")
-    public ResponseEntity<String> Purchase(@RequestParam Long orderId) {
+    @PostMapping("/customer={customerId}/car/addOrder={vehicleId}")
+    public ResponseEntity<Order> AddOrderCar(@PathVariable Long vehicleId, @PathVariable Long customerId){
+        return serv.addOrder( "car", vehicleId, customerId);
+    }
+
+    @PutMapping("/customer={customerId}/Purchase/{orderId}")
+    public ResponseEntity<String> Purchase(@PathVariable Long orderId, @PathVariable Long customerId) {
         return serv.Purchase(orderId);
     }
 
-    @DeleteMapping("/RemoveOrder")
-    public ResponseEntity<String> RemoveOrder(@RequestParam Long orderId){
+    @DeleteMapping("/customer={customerId}/RemoveOrder/{orderId}")
+    public ResponseEntity<String> RemoveOrder(@PathVariable Long orderId, @PathVariable Long customerId){
         return serv.removeOrder(orderId);
     }
 }
