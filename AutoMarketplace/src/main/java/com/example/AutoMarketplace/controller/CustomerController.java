@@ -33,17 +33,26 @@ public class CustomerController {
         }
     }
 
+
+
+
+
     @PostMapping("/customer")
     public ResponseEntity<?> addCustomer(@RequestBody Customer customer) {
 
         try {
             Customer customer1 = service.addCustomer(customer);
+
             return new ResponseEntity<>(customer1, HttpStatus.CREATED);
         }
+        catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
         catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("An error occurred. Please try again later.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @PutMapping("/customer/{id}")
     public ResponseEntity<String> updateCustomer(@PathVariable long id, @RequestBody Customer customer) {

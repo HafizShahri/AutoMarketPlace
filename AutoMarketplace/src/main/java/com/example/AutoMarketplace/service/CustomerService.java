@@ -23,13 +23,19 @@ public class CustomerService {
 
 
     public Customer addCustomer(Customer customer) {
-
+        // Check for email format
         if (customer.getEmail() == null || !customer.getEmail().contains("@")) {
             throw new IllegalArgumentException("Invalid email format. Email must contain '@'");
         }
+
+        // Check if email already exists
+        if (repo.existsByEmail(customer.getEmail())) {
+            throw new IllegalArgumentException("Email already exists.");
+        }
+
+        // Save customer if no issues
         return repo.save(customer);
     }
-
     public Customer updateCustomer(long id, Customer customer) {
 
         if (customer.getEmail() == null || !customer.getEmail().contains("@")) {
