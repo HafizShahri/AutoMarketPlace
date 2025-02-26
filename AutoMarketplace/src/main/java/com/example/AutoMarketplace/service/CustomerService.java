@@ -21,12 +21,31 @@ public class CustomerService {
         return repo.findById(id).orElse(null);
     }
 
+
     public Customer addCustomer(Customer customer) {
+
+        if (customer.getEmail() == null || !customer.getEmail().contains("@")) {
+            throw new IllegalArgumentException("Invalid email format. Email must contain '@'");
+        }
         return repo.save(customer);
     }
 
     public Customer updateCustomer(long id, Customer customer) {
-        return repo.save(customer);
+
+        if (customer.getEmail() == null || !customer.getEmail().contains("@")) {
+            throw new IllegalArgumentException("Invalid email format. Email must contain '@'");
+        }
+
+        Customer existingCustomer = repo.findById(id).orElse(null);
+        if (existingCustomer == null) {
+            throw new IllegalArgumentException("Customer not found with ID: " + id);
+        }
+
+        existingCustomer.setName(customer.getName());
+        existingCustomer.setEmail(customer.getEmail());
+        existingCustomer.setPassword(customer.getPassword());
+
+        return repo.save(existingCustomer);
     }
 
     public void deleteCustomer(long id) {

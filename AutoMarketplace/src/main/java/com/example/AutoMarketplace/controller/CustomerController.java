@@ -22,13 +22,14 @@ public class CustomerController {
     }
 
     @GetMapping("/customer/{id}")
-    public ResponseEntity<Customer> getCustomer(@PathVariable long id) {
+    public ResponseEntity<?> getCustomer(@PathVariable long id) {
         Customer customer = service.getCustomerById(id);
 
         if (customer != null) {
-            return new ResponseEntity<>(customer, HttpStatus.OK);
+            Customer customer1 = service.getCustomerById(id);
+            return new ResponseEntity<>(customer1, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Customer not found", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -47,13 +48,14 @@ public class CustomerController {
     @PutMapping("/customer/{id}")
     public ResponseEntity<String> updateCustomer(@PathVariable long id, @RequestBody Customer customer) {
 
-        Customer customer1 = null;
-        customer1 = service.updateCustomer(id,customer);
+
+        Customer customer1  = service.getCustomerById(id);
 
         if (customer1 != null) {
+            service.updateCustomer(id,customer);
             return new ResponseEntity<>("Updated", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Failed to update", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("User ID not exist", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -65,7 +67,7 @@ public class CustomerController {
             service.deleteCustomer(id);
             return new ResponseEntity<>("Deleted", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Product not found", HttpStatus.OK);
+            return new ResponseEntity<>("User ID not exist", HttpStatus.OK);
         }
     }
 
