@@ -27,6 +27,8 @@ public class OrderService {
     private CustomerService sevCus;
 
     public ResponseEntity<List<OrderDetails>> getOrderListByCustomerId(Long customerId) {
+        Customer customer = sevCus.getCustomerById(customerId);
+        if (customer == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         List<Order> orders = repo.findByCustomerId(customerId);
         List<OrderDetails> orderDetailsList = new ArrayList<>();
         for (Order order : orders){

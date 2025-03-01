@@ -45,14 +45,16 @@ public class MotorcycleController {
     @PutMapping("/motorcycle/{id}")
     public ResponseEntity<String> updateMotorcycle(@PathVariable long id, @RequestBody Motorcycle motorcycle) {
 
-        Motorcycle motorcycle1 = null;
-        motorcycle1 = service.updateMotorcycle(id,motorcycle);
+        Motorcycle motorcycle1 = service.getMotorcycleById(id);
 
-        if (motorcycle1 != null) {
-            return new ResponseEntity<>("Updated", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Failed to update", HttpStatus.BAD_REQUEST);
+        if (motorcycle1 == null) {
+            return new ResponseEntity<>("id not exist", HttpStatus.NOT_FOUND);
         }
+        if (motorcycle.getId() != id){
+            return new ResponseEntity<>("Id not match", HttpStatus.BAD_REQUEST);
+        }
+        service.updateMotorcycle(id, motorcycle);
+        return new ResponseEntity<>("Updated",HttpStatus.OK);
     }
 
     @DeleteMapping("/motorcycle/{id}")
@@ -63,7 +65,7 @@ public class MotorcycleController {
             service.deleteMotorcycle(id);
             return new ResponseEntity<>("Deleted", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Product not found", HttpStatus.OK);
+            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
         }
     }
 }

@@ -46,14 +46,17 @@ public class CarController {
     @PutMapping("/car/{id}")
     public ResponseEntity<String> updateProduct(@PathVariable long id, @RequestBody Car car) {
 
-        Car car1 = null;
-        car1 = service.updateCar(id,car);
+        Car car1 = service.getCarById(id);
 
-        if (car1 != null) {
-            return new ResponseEntity<>("Updated", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Failed to update", HttpStatus.BAD_REQUEST);
+        if (car1 == null) {
+            return new ResponseEntity<>("Id not exist" ,HttpStatus.NOT_FOUND);
         }
+        if (car.getId() != id){
+            return new ResponseEntity<>("Id not match", HttpStatus.BAD_REQUEST);
+        }
+        service.updateCar(id, car);
+        return new ResponseEntity<>("Updated",HttpStatus.OK);
+
     }
 
     @DeleteMapping("/car/{id}")
@@ -64,7 +67,7 @@ public class CarController {
             service.deleteCar(id);
             return new ResponseEntity<>("Deleted", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Product not found", HttpStatus.OK);
+            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
         }
     }
 }
